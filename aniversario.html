@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz 1er Mes</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: #ffe4e1;
+        overflow-x: hidden;
+    }
+    .page {
+        display: none;
+        width: 100%;
+        min-height: 100vh;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+        background: #ffe4e1 url('https://i.pinimg.com/originals/8b/3d/20/8b3d20c156ecb362f8731f4bbd4ecb5c.png') repeat;
+        background-size: contain;
+        color: #333;
+        position: relative;
+    }
+    .active {
+        display: block;
+    }
+    img {
+        max-width: 90%;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+    .heart-btn {
+        font-size: 50px;
+        cursor: pointer;
+        user-select: none;
+    }
+    .phrase {
+        font-size: 1.2em;
+        margin: 20px;
+    }
+    .confetti {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+    .confetti span {
+        position: absolute;
+        font-size: 20px;
+        animation: fall linear infinite;
+    }
+    @keyframes fall {
+        0% { transform: translateY(-50px) rotate(0deg);}
+        100% { transform: translateY(100vh) rotate(360deg);}
+    }
+    .title {
+        font-size: 2em;
+        color: #ff69b4;
+        margin-top: 40px;
+    }
+</style>
+</head>
+<body>
+
+<!-- Portada -->
+<div class="page active" id="page0">
+    <div class="title">Feliz 1er mes juntos 💖✨</div>
+    <div style="margin-top:40px;">
+        <span class="heart-btn" onclick="nextPage()">❤️ Empezar</span>
+    </div>
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-sweet.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<!-- Páginas del libro -->
+<div class="page" id="page1">
+    <img src="https://i.pinimg.com/originals/85/1a/6f/851a6f90d0ee8320a015e96fc1be4905.jpg" alt="Taekook 1">
+    <div class="phrase">Eres lo que siempre soñé sin darme cuenta, lo que pedí en silencio y hoy tengo conmigo.</div>
+    <div><span class="heart-btn" onclick="nextPage()">❤️</span></div>
+    <iframe width="300" height="150" src="https://www.youtube.com/embed/SXcFYnHSG08?autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+<div class="page" id="page2">
+    <img src="https://i.pinimg.com/originals/bd/f3/5c/bdf35c5b72d062dfb94b030c6342766b.jpg" alt="Taekook 2">
+    <div class="phrase">Hay canciones que hablan de amor, pero ninguna se compara con lo que siento por ti.</div>
+    <div><span class="heart-btn" onclick="nextPage()">❤️</span></div>
+    <iframe width="300" height="150" src="https://www.youtube.com/embed/SmF4wY7U7QE?autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+<!-- Última página especial -->
+<div class="page" id="page3">
+    <img src="https://i.pinimg.com/originals/76/1b/93/761b935f4205cd0e0f6eab7e0c3a7e7a.jpg" alt="Taekook final">
+    <div class="phrase" style="color: gold; font-size:1.5em; font-weight:bold;">Eres mi todo, gracias por existir 💕</div>
+    <div><span class="heart-btn" onclick="startConfetti()">❤️</span></div>
+    <div class="confetti" id="confetti"></div>
+</div>
+
+<script>
+let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+
+function nextPage(){
+    pages[currentPage].classList.remove('active');
+    currentPage++;
+    if(currentPage >= pages.length) currentPage = pages.length-1;
+    pages[currentPage].classList.add('active');
+}
+
+// Confetti de besos y "Te amo"
+function startConfetti(){
+    const confettiContainer = document.getElementById('confetti');
+    for(let i=0;i<100;i++){
+        let span = document.createElement('span');
+        span.style.left = Math.random()*100 + '%';
+        span.style.animationDuration = 2+Math.random()*3+'s';
+        span.style.fontSize = 15+Math.random()*25+'px';
+        span.innerText = Math.random()>0.5 ? '💋' : '💖 Te amo';
+        confettiContainer.appendChild(span);
+        setTimeout(()=>{span.remove()},5000);
+    }
+    setInterval(()=>{
+        let span = document.createElement('span');
+        span.style.left = Math.random()*100 + '%';
+        span.style.animationDuration = 2+Math.random()*3+'s';
+        span.style.fontSize = 15+Math.random()*25+'px';
+        span.innerText = Math.random()>0.5 ? '💋' : '💖 Te amo';
+        confettiContainer.appendChild(span);
+        setTimeout(()=>{span.remove()},5000);
+    },300);
+}
+</script>
+
+</body>
+</html>
